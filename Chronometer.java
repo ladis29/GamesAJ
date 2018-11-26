@@ -6,9 +6,9 @@ public class Chronometer {
 	private int secondsAvailable;
 	private int seconds = getSecondsAvailable()%60;
 	private int minutesAvailable = getSecondsAvailable()%60;
-	private int minutes = getSecondsAvailable()/60;
+	private int minutes = getMinutesAvailable()/60;
 
-	Timer timer = new Timer();
+	Timer timer = new Timer(true);
 	TimerTask task = new TimerTask() {
 		public void run() {
 			setSecondsAvailable(getSecondsAvailable() - 1);
@@ -20,7 +20,7 @@ public class Chronometer {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 
 	}
-
+	public Chronometer(){}
 	public Chronometer(int level) {
 
 		if (level == 1) {
@@ -30,6 +30,7 @@ public class Chronometer {
 
 		start();
 	}
+
 
 	public int getSecondsAvailable() {
 		return secondsAvailable;

@@ -64,7 +64,7 @@ public class Hangman {
 				// As próximas 3 linhas captam a tentativa do usuário e chamam a classe Typed
 				// para verificar se a tentativa não é repetida
 				System.out.print(messages.getCommandToTypeHang());
-				guess = sc.next().charAt(0);
+				guess = sc.next().toLowerCase().charAt(0);
 				if (typed.verifyTypedLetters(guess)) {
 					//Se a letra for repetida vou incrementar a jogada mas não vou incrementar a variável lostGuess
 					played++;

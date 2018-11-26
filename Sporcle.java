@@ -8,6 +8,7 @@ public class Sporcle {
 	Screen screen = new Screen();
 	Messages messages = new Messages();
 	Guessed guessed = new Guessed();
+	Chronometer chrono = new Chronometer();
 
 	Scanner sc = new Scanner(System.in);
 
@@ -16,13 +17,14 @@ public class Sporcle {
 	private int level = 1;// Nível inicial
 	private String[] list;// Lista de Palavras a serem descobertas
 
+
 	public Sporcle(String name, char gender) {
 
 		Messages namedMessages = new Messages(name);
 
 		while (!leveler.getFinished()) {
 			wordsWereDiscovered = false;
-			Chronometer chrono = new Chronometer(level);
+			this.chrono = new Chronometer(level);
 			typed.setTypedWords(new ArrayList<String>());
 			leveler.leveler(level);
 			list = leveler.getLevelWords();
@@ -32,19 +34,19 @@ public class Sporcle {
 
 				// As próximas 3 linhas montam a tela do jogo
 				screen.clearScreen();
-				System.out.println(messages.getTimeRemaining() + chrono.getSecondsAvailable() + " segundos.");
+				System.out.println(messages.getTimeRemaining() + (chrono.getSecondsAvailable()/60) + ":" + (chrono.getSecondsAvailable()%60));
 				screen.printArray(screen.getShowedWords(), level);
 
 				// As próximas 3 linhas captam a tentativa do usuário e chamam a classe Typed
 				// para verificar se a tentativa não é repetida
 				System.out.print(messages.getCommandToTypeSporcle());
-				guess = sc.next();
+				guess = sc.next().toLowerCase();
 				if (typed.verifyTypedWords(guess)) {
 
 					System.out.println(namedMessages.getAlreadyTypedSporcle());
 					sc.nextLine();
 				} // fim do if que verifica se a palavra já havia sido digitada
-				else if (guess == "_") {
+				else if (guess.equals("_")) {
 					leveler.setFinished(true);
 					break;
 				} // fim do if que encerra o Jogo
