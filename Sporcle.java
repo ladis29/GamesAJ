@@ -8,7 +8,6 @@ public class Sporcle {
 	Screen screen = new Screen();
 	Messages messages = new Messages();
 	Guessed guessed = new Guessed();
-	Chronometer chrono = new Chronometer();
 
 	Scanner sc = new Scanner(System.in);
 
@@ -24,7 +23,7 @@ public class Sporcle {
 
 		while (!leveler.getFinished()) {
 			wordsWereDiscovered = false;
-			this.chrono = new Chronometer(level);
+			Chronometer chrono = new Chronometer(level);
 			typed.setTypedWords(new ArrayList<String>());
 			leveler.leveler(level);
 			list = leveler.getLevelWords();
